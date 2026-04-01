@@ -1,0 +1,24 @@
+exe_path: C:/SoftWare/Cfst/cfst.exe
+ip_file: C:/SoftWare/Cfst/ipv6.txt
+output_file: C:/SoftWare/Cfst/result.txt
+output_dir: C:/SoftWare/Cfst/Result
+n: '500'
+t: '4'
+dn: '100'
+dt: '10'
+tp: '443'
+url: https://cp.cloudflare.com/generate_204
+httping: true
+httping_code: '204'
+cfcolo: SEA,SJC,SEA,TPA,SFO,SLC,CAN,FOC,HKG,FUK,MFM
+tl: '300'
+tll: '0'
+tlr: '1.00'
+sl: '5'
+p: '100'
+ip_seg: 2606:4700::/48
+dd: true
+allip: false
+debug: false
+last_ip:
+- 2606:4700::d2ec:c829:130d:15ac

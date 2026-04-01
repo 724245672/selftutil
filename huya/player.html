@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>FLV 直播播放器</title>
+  <style>
+    body { margin:0; background:#000; overflow:hidden; }
+    #videoContainer { width:100vw; height:100vh; }
+    video { width:100%; height:100%; object-fit: contain; }
+  </style>
+</head>
+<body>
+  <div id="videoContainer"></div>
+
+  <script src="flv.js"></script>
+  <script>
+    const url = new URLSearchParams(window.location.search).get('url') || '';
+
+    if (flvjs.isSupported()) {
+      const videoElement = document.createElement('video');
+      videoElement.controls = true;
+      videoElement.autoplay = true;
+      videoElement.muted = true;
+      document.getElementById('videoContainer').appendChild(videoElement);
+
+      const flvPlayer = flvjs.createPlayer({
+        type: 'flv',
+        url: url,
+        isLive: true,                // 重要：直播模式
+        cors: true,                  // 跨域
+        enableWorker: true,
+        stashInitialSize: 128,       // 降低首帧延迟
+        enableStashBuffer: false     // 直播建议关闭
+      });
+
+      flvPlayer.attachMediaElement(videoElement);
+      flvPlayer.load();
+      flvPlayer.play().catch(e => console.log("播放失败:", e));
+    } else {
+      document.body.innerHTML = '<h1 style="color:white;text-align:center">浏览器不支持 flv.js</h1>';
+    }
+  </script>
+</body>
+</html>
